@@ -1,0 +1,41 @@
+# FFMPEG TIPS & TRICKS
+
+## INSTALL NOTES
+
+1. For full builds ( pre compiled with extra library) get the compiled builds from
+   [https://www.gyan.dev/ffmpeg/builds/#tools](https://www.gyan.dev/ffmpeg/builds/#tools)
+2. Add ffmpeg to the ENV Path for easier access\
+   `Copy ffmpeg to C:\ffmpeg\ and add env path as C:\ffmpeg\bin`
+
+3. Test successful install:\
+`using command prompt, type ffmpeg --version, you should get a printout from ffmpeg `
+
+
+## EXAMPLES MISC
+
+## EXAMPLES GET SCREENSHOT FROM FILE IN FOLDER | Simple
+
+`@echo off`\
+`VPMD EXTRACT PNG FROM SLASBUCKLING NOTCHLC`\
+`@for %%i in (*.mov *.mp4 *.webm) do ffmpeg -ss 1 -i "%%i" -frames:v 1 -q:v 2 "%%~ni.jpg"`\
+`pause`
+
+## A NOTES ABOUT TEXT
+"drawtext" modules is quite picky and we are here avoiding setting up the default config file, instead we are passing as argument a fontfile path. Note the tricky double \\ to the file path. NB: please check your windows install as the font file (arial in our example) if the font file isn't found it will error out saying config / font file not found.
+
+## EXAMPLES GET SCREENSHOT FROM FILE IN FOLDER | Pretty
+
+`@echo off`\
+`VPMD EXTRACT PNG FROM SLASBUCKLING NOTCHLC`\
+`@for %%i in (*.mov *.mp4 *.webm) do ffmpeg -ss 1 -i "%%i" -vf "drawtext=fontfile='c\:\\Windows\\Fonts\\arial.ttf':x=(w-text_w)/2:y=(h-(text_h*2)):fontsize=50:fontcolor=white:box=1:boxcolor=black@0.65:boxborderw=5:text=%%~ni" -frames:v 1 -q:v 2 "%%~ni.jpg"`\
+`pause`
+
+### ADDITIONAL TEXT EXAMPLES
+
+**Text Positions**\
+`:x=640:y=360`\
+`:x=(w-text_w)/2:y=(h-text_h)/2`
+
+**Box**\
+`box=1:boxcolor=black@0.75:boxborderw=5`\
+note the fancy @0.75 for creating a gray color :)
