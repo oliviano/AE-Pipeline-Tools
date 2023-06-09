@@ -1,0 +1,47 @@
+  #### Some Code Snippets ####
+  
+  Create Adj Layer and Add effects:
+
+
+/ Need to fetch Current Comp Size 
+var compX
+var compY
+
+/
+
+var solid = comp.layers.addSolid([0,0,0], 'LayerName', 1920, 1080, 1, duration);
+solid.adjustmentLayer = true
+
+/ Apply openColorIO
+/ Adjust color openColorIO settings
+
+
+
+// FROM https://www.aenhancers.com/viewtopic.php?t=1112
+
+
+//start
+myComp = app.project.activeItem;
+mySolid = myComp.layers.addSolid([0,0,0], "colorCorrect", myComp.width, myComp.height,1);
+mySolid.startTime = 0
+mySolid.adjustmentLayer = true;
+//end
+
+myEffect = mySolid.property("Effects").addProperty("ADBE Lens Flare");
+
+
+//start
+var my_file = new File("d:/1.aep");
+new_project = app.open(my_file);myComp = app.project.activeItem;
+mySolid = myComp.layers.addSolid([0,0,0], "colorCorrect", myComp.width, myComp.height,1);
+mySolid.adjustmentLayer = true;
+myEffect = mySolid.property("Effects").addProperty("Fast Blur")("Blurriness").setValue(61);
+var myQueue = app.project.renderQueue
+myQueue.render();
+var projectName = "Unsaved Project";
+app.project.close(CloseOptions.DO_NOT_SAVE_CHANGES)
+//end
+
+
+https://ae-scripting.docsforadobe.dev/
+https://ae-scripting.docsforadobe.dev/properties/propertybase.html
